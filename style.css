@@ -1,0 +1,357 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #FF9933, #FFFFFF, #138808);
+    padding: 15px 0;
+    color: #000080; /* Blue */
+    border-bottom: 5px solid #000080;
+    position: relative; /* Crucial for positioning nav toggle */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.8em;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.main-nav {
+    display: flex;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav li {
+    margin-left: 20px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #000080;
+    font-weight: 600;
+    padding: 5px 10px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: #FF6347; /* Tomato */
+}
+
+.nav-toggle {
+    display: none; /* Hidden by default */
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+/* Marquee */
+.marquee {
+    width: 100%;
+    background-color: #000080; /* Blue */
+    color: white;
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.marquee p {
+    display: inline-block;
+    padding-left: 100%;
+    margin: 0;
+    animation: marquee-scroll 30s linear infinite;
+}
+
+@keyframes marquee-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Main Content */
+main {
+    padding: 20px 0;
+}
+
+.welcome-section, .about-section, .contact-form-section, .join-form-section {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.btn {
+    background-color: #000080; /* Blue */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0000CD; /* MediumBlue */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Slider Section */
+.slider-section {
+    position: relative;
+    max-width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.slider {
+    position: relative;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    width: 100%; /* Ensure image takes full width of the container */
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.5em;
+    z-index: 100;
+    border-radius: 50%;
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* Card Layout */
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin: 10px;
+    text-align: left;
+    flex: 1 1 300px;
+    max-width: 350px;
+    box-sizing: border-box;
+}
+
+.news-section .card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.team-section .card {
+    text-align: center;
+}
+
+.team-section img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box; /* Added for better padding control */
+}
+
+/* Gallery */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: white;
+    margin-top: 30px;
+}
+
+/* --- Responsive Styles --- */
+
+@media (max-width: 992px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .header-content {
+        /* Make space for the absolutely positioned nav-toggle */
+        padding-left: 60px;
+        position: relative;
+    }
+
+    .nav-toggle {
+        display: block; /* Show hamburger icon */
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2em; /* Made it a bit bigger */
+        cursor: pointer;
+        z-index: 1001; /* Ensure it's above other header content */
+    }
+
+    .main-nav {
+        display: none; /* Hide nav by default */
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        border-top: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    .main-nav.nav-active {
+        display: block; /* Show nav when active */
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-nav li {
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    /* The header content will no longer stack, it will stay as a row */
+    /* The nav-toggle is already positioned absolutely from the 992px media query */
+
+    .logo {
+        /* Make logo slightly smaller on the smallest screens */
+        width: 60px;
+        margin-right: 15px; /* Add some space between logo and title */
+    }
+
+    h1 {
+        font-size: 1.2em; /* Adjust font size */
+        text-align: left; /* Align to left to follow the logo */
+    }
+
+    .header-content {
+        /* Adjust padding for smaller screens */
+        padding-left: 70px; /* Increased padding for the icon */
+        justify-content: flex-start; /* Align items to the start */
+    }
+    
+    .container {
+        padding: 10px;
+    }
+
+    .card {
+        margin-left: 0;
+        margin-right: 0;
+        flex-basis: 90%;
+        padding: 15px;
+    }
+
+    .card-container {
+       flex-direction: column; 
+       align-items: center;
+    }
+
+    .slider-btn {
+        padding: 5px;
+        font-size: 1em;
+    }
+
+    .welcome-section h2 {
+        font-size: 1.5em;
+    }
+
+    .form-group {
+        padding: 0 10px;
+    }
+
+    footer {
+        font-size: 0.9em;
+    }
+}

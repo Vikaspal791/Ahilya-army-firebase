@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Ahilya Army Bharat Ekta Mission</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="images/ahilya_army_header.png" alt="Ahilya Army Logo" class="logo">
+            <h1>Ahilya Army Bharat Ekta Mission</h1>
+            <div class="nav-toggle">☰</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="joinus.html">Join Us</a></li>
+                    <li><a href="donate.html">Donate</a></li>
+                    <li><a href="admin.html">Admin Panel</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <section id="loginSection" class="card">
+            <h2>Admin Login</h2>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button id="loginBtn" class="btn">Login</button>
+        </section>
+
+        <section id="adminPanel" style="display: none;">
+            <h2>Member Records</h2>
+            <div class="admin-controls">
+                <input type="text" id="searchInput" placeholder="Search by Name, Mobile, or ID">
+                <button id="exportCsvBtn" class="btn">Export to CSV</button>
+            </div>
+            <div class="table-container">
+                <table id="membersTable">
+                    <thead>
+                        <tr>
+                            <th>Member ID</th>
+                            <th>Name</th>
+                            <th>Father's Name</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Member data will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div id="idCardModal" class="modal" style="display:none;">
+            <div class="modal-content card">
+                <span class="close">&times;</span>
+                <h3>Member ID Card</h3>
+                <div id="idCard">
+                    <div class="id-card-header">
+                        <img src="images/ahilya_army_header.png" alt="Logo">
+                        <h4>Ahilya Army Bharat Ekta Mission</h4>
+                    </div>
+                    <div class="id-card-body">
+                        <img id="memberPhoto" src="" alt="Member Photo">
+                        <div class="member-info">
+                            <p><strong>Name:</strong> <span id="cardMemberName"></span></p>
+                            <p><strong>Role/Position:</strong> <span id="cardMemberRole">Member</span></p>
+                            <p><strong>Member ID:</strong> <span id="cardMemberId"></span></p>
+                        </div>
+                        <div id="qrcode"></div>
+                    </div>
+                </div>
+                <input type="file" id="photoUpload" accept="image/*">
+                <button id="uploadPhotoBtn" class="btn">Upload Photo</button>
+                <button id="printCardBtn" class="btn">Print Card</button>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <p>&copy; 2024 Ahilya Army Bharat Ekta Mission. All Rights Reserved.</p>
+    </footer>
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
