@@ -1,9 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js";
+import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
 
-let db, storage, analytics;
+let db;
 
 const stateDistrictMap = {
     "Andaman and Nicobar Islands": ["Nicobar", "North and Middle Andaman", "South Andaman"],
@@ -44,23 +43,6 @@ const stateDistrictMap = {
     "West Bengal": ["Alipurduar", "Bankura", "Birbhum", "Cooch Behar", "Dakshin Dinajpur", "Darjeeling", "Hooghly", "Howrah", "Jalpaiguri", "Jhargram", "Kalimpong", "Kolkata", "Malda", "Murshidabad", "Nadia", "North 24 Parganas", "Paschim Bardhaman", "Paschim Medinipur", "Purba Bardhaman", "Purba Medinipur", "Purulia", "South 24 Parganas", "Uttar Dinajpur"]
 };
 
-// Updated list of all available positions by team level
-const ALL_POSITIONS = {
-    "District": [
-        "District President", "District Vice President", "District General Secretary", 
-        "District Secretary", "District Treasurer", "District Media Incharge", "District Spokesperson"
-    ],
-    "Block": [
-        "Block President", "Block Vice President", "Block General Secretary", 
-        "Block Secretary", "Block Treasurer", "Block Media Incharge", "Block Spokesperson"
-    ],
-    "Tehsil": [
-        "Tehsil President", "Tehsil Vice President", "Tehsil General Secretary", 
-        "Tehsil Secretary", "Tehsil Treasurer", "Tehsil Media Incharge", "Tehsil Spokesperson"
-    ]
-};
-
-
 function initializeFirebase() {
     if (db) return true;
     try {
@@ -75,8 +57,7 @@ function initializeFirebase() {
        };
        const app = initializeApp(firebaseConfig);
        db = getFirestore(app);
-       storage = getStorage(app);
-       analytics = getAnalytics(app);
+       getAnalytics(app);
        return true;
     } catch (error) {
         console.error("Firebase initialization failed: ", error);
@@ -85,7 +66,7 @@ function initializeFirebase() {
 }
 
 function populateStates() {
-    const stateSelect = document.getElementById('state');
+    const stateSelect = document.getElementById('stateSelect');
     const states = Object.keys(stateDistrictMap).sort();
     states.forEach(state => {
         const option = document.createElement('option');
@@ -96,10 +77,12 @@ function populateStates() {
 }
 
 function handleStateChange() {
-    const stateSelect = document.getElementById('state');
-    const districtSelect = document.getElementById('district');
+    const stateSelect = document.getElementById('stateSelect');
+    const districtSelect = document.getElementById('districtSelect');
     const selectedState = stateSelect.value;
-    districtSelect.innerHTML = '<option value="">-- Select District --</option>';
+
+    districtSelect.innerHTML = '<option value="">-- Select a District --</option>';
+
     if (selectedState && stateDistrictMap[selectedState]) {
         const districts = stateDistrictMap[selectedState].sort();
         districts.forEach(district => {
@@ -109,165 +92,83 @@ function handleStateChange() {
             districtSelect.appendChild(option);
         });
     }
-    updateAvailablePositions();
 }
 
-async function updateAvailablePositions() {
-    const joinType = document.getElementById('joinType').value;
-    if (joinType !== 'worker') return;
-
-    const state = document.getElementById('state').value;
-    const district = document.getElementById('district').value;
-    const teamLevel = document.getElementById('teamLevel').value;
-    const positionSelect = document.getElementById('position');
-
-    positionSelect.innerHTML = '<option value="">Loading...</option>';
-
-    if (!state || !district || !teamLevel) {
-        positionSelect.innerHTML = '<option value="">-- First select State, District, and Level --</option>';
+async function searchTeam() {
+    if (!db) {
+        alert("Database not initialized.");
         return;
     }
 
-    try {
-        const potentialPositions = ALL_POSITIONS[teamLevel];
-        if (!potentialPositions) {
-             positionSelect.innerHTML = '<option value="">-- Invalid Level --</option>';
-             return;
-        }
+    const state = document.getElementById('stateSelect').value;
+    const district = document.getElementById('districtSelect').value;
+    const teamDisplay = document.getElementById('team-display');
 
-        const q = query(collection(db, "teamMembers"), where("state", "==", state), where("district", "==", district), where("teamLevel", "==", teamLevel));
+    if (!state || !district) {
+        teamDisplay.innerHTML = '<p class="error-message">Please select both a state and a district.</p>';
+        return;
+    }
+
+    teamDisplay.innerHTML = '<p>Searching for team members...</p>';
+
+    try {
+        const q = query(collection(db, "teamMembers"), where("state", "==", state), where('district', '==', district));
         const querySnapshot = await getDocs(q);
-        const occupiedPositions = querySnapshot.docs.map(doc => doc.data().position);
-        const availablePositions = potentialPositions.filter(p => !occupiedPositions.includes(p));
-        
-        positionSelect.innerHTML = '';
-        if (availablePositions.length === 0) {
-            positionSelect.innerHTML = '<option value="">-- All positions filled --</option>';
+
+        if (querySnapshot.empty) {
+            teamDisplay.innerHTML = '<p>No team members found for this selection.</p>';
             return;
         }
 
-        availablePositions.forEach(pos => {
-            const option = document.createElement('option');
-            option.value = pos;
-            option.textContent = pos;
-            positionSelect.appendChild(option);
+        const members = [];
+        querySnapshot.forEach(doc => members.push(doc.data()));
+
+        let html = `
+            <table class="team-results-table">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Name</th>
+                        <th>Father\'s Name</th>
+                        <th>Position</th>
+                        <th>Mobile Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        members.forEach((member, index) => {
+            html += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${member.name || 'N/A'}</td>
+                    <td>${member.fatherName || 'N/A'}</td>
+                    <td>${member.position || 'N/A'}</td>
+                    <td>${member.mobile || 'N/A'}</td>
+                </tr>
+            `;
         });
+
+        html += `
+                </tbody>
+            </table>
+        `;
+
+        teamDisplay.innerHTML = html;
 
     } catch (error) {
-        console.error("Error fetching positions: ", error);
-        positionSelect.innerHTML = '<option value="">-- Error loading --</option>';
+        console.error("Error searching for team members: ", error);
+        teamDisplay.innerHTML = '<p class="error-message">An error occurred while searching. Please try again.</p>';
     }
 }
-
-function toggleWorkerFields(show) {
-    const workerDetails = document.getElementById('worker-details');
-    // Define which fields are mandatory for a worker application
-    const requiredFields = ['email', 'photo', 'teamLevel', 'position'];
-    
-    if (show) {
-        workerDetails.style.display = 'block';
-        // Make only the specified fields required
-        requiredFields.forEach(id => {
-            const el = document.getElementById(id);
-            if(el) el.required = true;
-        });
-    } else {
-        workerDetails.style.display = 'none';
-        // Remove 'required' from all fields within the worker section
-        const allFields = workerDetails.querySelectorAll('input, select');
-        allFields.forEach(field => field.required = false);
-    }
-}
-
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (!initializeFirebase()) {
-        document.getElementById('formMessage').textContent = "Error: Could not connect to the database. Please try again later.";
-        document.getElementById('formMessage').style.display = 'block';
-        return;
+    if (initializeFirebase()) {
+        populateStates();
+        const stateSelect = document.getElementById("stateSelect");
+        stateSelect.addEventListener("change", handleStateChange);
+
+        const searchBtn = document.getElementById("searchBtn");
+        searchBtn.addEventListener("click", searchTeam);
     }
-
-    const joinForm = document.getElementById('joinForm');
-    const joinTypeSelect = document.getElementById('joinType');
-    const stateSelect = document.getElementById('state');
-    const districtSelect = document.getElementById('district');
-    const teamLevelSelect = document.getElementById('teamLevel');
-    const submitBtn = document.getElementById('submitBtn');
-    const formMessage = document.getElementById('formMessage');
-
-    populateStates();
-
-    stateSelect.addEventListener('change', handleStateChange);
-    districtSelect.addEventListener('change', updateAvailablePositions);
-    teamLevelSelect.addEventListener('change', updateAvailablePositions);
-    joinTypeSelect.addEventListener('change', () => {
-        const isWorker = joinTypeSelect.value === 'worker';
-        toggleWorkerFields(isWorker);
-        if (isWorker) {
-            updateAvailablePositions();
-        }
-    });
-
-    joinForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Submitting...';
-        formMessage.style.display = 'none';
-
-        const joinType = joinTypeSelect.value;
-
-        try {
-            let photoURL = null;
-            const requestData = {
-                name: document.getElementById('name').value,
-                fatherName: document.getElementById('fatherName').value,
-                mobile: document.getElementById('mobile').value,
-                state: stateSelect.value,
-                district: districtSelect.value,
-                joinType: joinType,
-                requestDate: serverTimestamp(),
-                status: 'pending'
-            };
-
-            if (joinType === 'worker') {
-                const photoFile = document.getElementById('photo').files[0];
-                if (!photoFile) throw new Error('Photo is required when applying for a position.');
-                
-                if (!document.getElementById('teamLevel').value || !document.getElementById('position').value) {
-                    throw new Error("Please select a team level and position.");
-                }
-
-                const photoName = `join_photos/${Date.now()}_${photoFile.name}`;
-                const photoRef = ref(storage, photoName);
-                const uploadResult = await uploadBytes(photoRef, photoFile);
-                photoURL = await getDownloadURL(uploadResult.ref);
-
-                // Add all worker-specific data
-                requestData.email = document.getElementById('email').value;
-                requestData.photoURL = photoURL;
-                requestData.block = document.getElementById('block').value; // Optional
-                requestData.address1 = document.getElementById('address1').value; // Optional
-                requestData.postalCode = document.getElementById('postalCode').value; // Optional
-                requestData.teamLevel = teamLevelSelect.value;
-                requestData.requestedPosition = document.getElementById('position').value;
-            }
-            
-            await addDoc(collection(db, "joinRequests"), requestData);
-
-            joinForm.reset();
-            toggleWorkerFields(false);
-            formMessage.textContent = 'Application submitted successfully! We will review it shortly.';
-            formMessage.style.color = 'green';
-            formMessage.style.display = 'block';
-
-        } catch (error) {
-            console.error("Error submitting application: ", error);
-            formMessage.textContent = `Error: ${error.message || "An unknown error occurred."}`;
-            formMessage.style.color = 'red';
-            formMessage.style.display = 'block';
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit Application';
-        }
-    });
 });

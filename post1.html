@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donate - Ahilya Army Bharat Ekta Mission</title>
-    <link rel="icon" href="images/Ahilya army logo.png" type="image/png">
+    <title>The Enduring Legacy of Lokmata Ahilya Bai Holkar - Ahilya Army</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
 </head>
@@ -58,7 +57,7 @@
             <li><a href="about.html">About</a></li>
             <li><a href="events.html">Events</a></li>
             <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
             <li><a href="team.html">Our Team</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="joinus.html">Join Us</a></li>
@@ -66,72 +65,29 @@
             <li><a href="admin.html">Admin Panel</a></li>
         </ul>
     </nav>
+
     <main class="container">
-        <section class="donate-section">
-            <h2>Support Our Mission</h2>
-            <div class="card">
-                <p>Your contribution will help us continue our work of promoting peace, unity, and development across India. Every donation, no matter how small, makes a difference.</p>
-                <p>To donate, please use the following details:</p>
-                <p><strong>Bank Name:</strong> [Your Bank Name]</p>
-                <p><strong>Account Number:</strong> [Your Account Number]</p>
-                <p><strong>IFSC Code:</strong> [Your IFSC Code]</p>
-                <br>
-                <p>Alternatively, you can scan the QR code below to donate using UPI.</p>
-                <img src="images/upi-qr-code.png" alt="UPI QR Code" style="max-width: 200px; margin-top: 20px;">
-                <br><br>
-                <a href="#" class="btn">Donate with Razorpay</a>
-            </div>
+        <section class="blog-post-full">
+            <h2>The Enduring Legacy of Lokmata Ahilya Bai Holkar</h2>
+            <p class="blog-meta">Published on: June 10, 2024</p>
+            <img src="images/ahilya-bai-post.jpg" alt="Ahilya Bai Holkar" style="width:100%; max-width:600px; margin:20px auto; display:block; border-radius:10px;">
+            <p>
+                Lokmata Ahilya Bai Holkar, a beacon of strength and wisdom, ruled Malwa with unparalleled compassion and foresight. Her reign is remembered for its focus on justice, good governance, and public welfare. She sponsored the construction of hundreds of temples, dharamshalas, and wells across India, fostering a culture of unity and faith. Her principles continue to be the cornerstone of our organization, guiding our mission to empower communities and uphold righteousness.
+            </p>
+            <p>
+                Born in 1725 in the village of Chondi in Maharashtra, Ahilya Bai was chosen as a bride for Khanderao Holkar, son of the esteemed Malhar Rao Holkar. After the tragic deaths of her husband and father-in-law, she took the reins of the kingdom, defying conservative norms. She led her armies from the front, proving to be a formidable military leader, but her true legacy lies in her peaceful and prosperous administration. Her 30-year reign is considered a golden age in Malwa's history.
+            </p>
+            <a href="blog.html" class="btn" style="margin-top: 20px;">Back to Blog</a>
         </section>
     </main>
+
     <footer>
         <p>&copy; 2024 Ahilya Army Bharat Ekta Mission. All Rights Reserved.</p>
     </footer>
     
-    <!-- Google Translate Element -->
     <div id="google_translate_element" style="display:none;"></div>
-
     <script src="js/main.js"></script>
-
-    <!-- Google Translate Scripts for Custom Button -->
-    <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
-    }
-
-    function getCookie(name) {
-        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-        return v ? v[2] : null;
-    }
-
-    function setCookie(name, value, days) {
-        var d = new Date;
-        d.setTime(d.getTime() + 24*60*60*1000*days);
-        document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
-    }
-
-    function toggleLanguage() {
-        var langCookie = getCookie('googtrans');
-        // If cookie is /en/hi, switch to english, else switch to hindi
-        if (langCookie === '/en/hi') {
-            changeLanguage('en');
-        } else {
-            changeLanguage('hi');
-        }
-    }
-
-    function changeLanguage(lang) {
-        var currentLang = getCookie('googtrans');
-        if (!currentLang) {
-            currentLang = '/en/en'; // Default
-        }
-        
-        // This sets the cookie that Google Translate reads on the next page load
-        setCookie('googtrans', '/en/' + lang, 1);
-        
-        // Reload the page to apply the new language
-        window.location.reload();
-    }
-    </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>

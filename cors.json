@@ -1,0 +1,14 @@
+
+[
+  {
+    "origin": [
+      "https://32963-firebase-ahilya-army-1761023349035.cluster-edb2jv34dnhjisxuq5m7l37ccy.cloudworkstations.dev",
+      "https://ahilya-army-website.web.app",
+      "https://ahilya-army-website.firebaseapp.com",
+      "http://localhost:5000"
+    ],
+    "method": ["GET", "HEAD", "PUT", "POST", "DELETE"],
+    "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"],
+    "maxAgeSeconds": 3600
+  }
+]

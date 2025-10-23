@@ -13,85 +13,216 @@ body {
     padding: 20px;
 }
 
-/* Header */
-header {
+/* New Header Styles */
+.site-header {
     background: linear-gradient(to right, #FF9933, #FFFFFF, #138808);
-    padding: 15px 0;
-    color: #000080; /* Blue */
+    color: #000;
+    padding: 10px 20px;
+    position: relative;
     border-bottom: 5px solid #000080;
-    position: relative; /* Crucial for positioning nav toggle */
 }
 
-.header-content {
+.language-switcher {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 10;
+}
+
+.language-switcher a {
+    color: #000080;
+    background-color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 5px 10px;
+    border: 1px solid #000080;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.language-switcher a:hover {
+    background-color: #000080;
+    color: white;
+}
+
+.leader-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.leader-images img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #000080;
+    object-fit: cover;
+}
+
+.leader-images .ahilya-bai-img {
+    width: 80px; /* Larger size */
+    height: 80px;
+    border-width: 3px;
+}
+
+.header-main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    text-align: center;
+    padding: 10px 0;
+    gap: 20px;
 }
 
-.logo {
+.header-side-members {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.side-member-card {
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.side-member-card img {
     width: 80px;
     height: auto;
+    margin-bottom: 5px;
+}
+.side-member-card p {
+    margin: 0;
+    font-weight: 500;
+    color: #000;
 }
 
-h1 {
-    margin: 0;
-    font-size: 1.8em;
-    text-align: center;
+.header-text {
     flex-grow: 1;
 }
 
-.main-nav {
-    display: flex;
+.main-title {
+    color: #000080; /* Blue color for the text */
+    font-size: 2.8em;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-.main-nav ul {
+.sub-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #333;
+}
+
+.title-hr {
+    border: 0;
+    height: 2px;
+    background-color: #000080;
+    margin: 10px auto;
+    width: 80%;
+}
+
+.contact-info, .address {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #000;
+    font-weight: 500;
+}
+
+.header-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.header-logo {
+    width: 150px; /* Increased logo size */
+    height: auto;
+}
+
+.reg-text {
+    margin-top: 5px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* New Navigation Bar Styles */
+.main-navbar {
+    background-color: #000080; /* Navy blue */
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.nav-links {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.main-nav li {
-    margin-left: 20px;
+.nav-links li {
+    margin: 5px 15px;
 }
 
-.main-nav a {
+.nav-links a {
     text-decoration: none;
-    color: #000080;
+    color: white;
     font-weight: 600;
     padding: 5px 10px;
     transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 4px;
 }
 
-.main-nav a:hover {
-    color: #FF6347; /* Tomato */
+.nav-links a:hover, .nav-links a.active {
+    background-color: white;
+    color: #000080;
 }
 
 .nav-toggle {
     display: none; /* Hidden by default */
-    font-size: 1.8em;
+    color: white;
+    font-size: 2em;
     cursor: pointer;
+    text-align: center;
 }
 
 /* Marquee */
 .marquee {
     width: 100%;
-    background-color: #000080; /* Blue */
-    color: white;
+    background-color: white;
     padding: 10px 0;
     overflow: hidden;
     white-space: nowrap;
     box-sizing: border-box;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
 .marquee p {
     display: inline-block;
     padding-left: 100%;
     margin: 0;
-    animation: marquee-scroll 30s linear infinite;
+    animation: marquee-scroll 45s linear infinite;
+}
+
+.marquee a {
+    color: #000080; /* Blue color for links */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.marquee a:hover {
+    text-decoration: underline;
 }
 
 @keyframes marquee-scroll {
@@ -121,6 +252,7 @@ main {
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
 }
 
 .btn:hover {
@@ -131,11 +263,11 @@ main {
 /* Slider Section */
 .slider-section {
     position: relative;
-    max-width: 100%;
-    margin: 20px auto;
+    max-width: 90%; /* Adjusted from 100% */
+    margin: 40px auto; /* Increased margin */
     overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 15px; /* Smoother edges */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .slider {
@@ -150,27 +282,72 @@ main {
 .slide {
     min-width: 100%;
     box-sizing: border-box;
-    width: 100%; /* Ensure image takes full width of the container */
+    max-height: 80vh; /* **ADJUSTED** Constrain slide height */
+    overflow: hidden; 
+}
+
+.slide img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
+    border-radius: 15px;
 }
 
 .slider-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px;
     cursor: pointer;
-    font-size: 1.5em;
+    font-size: 1.8em;
     z-index: 100;
     border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+.slider-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
+.prev-btn { left: 15px; }
+.next-btn { right: 15px; }
 
-/* Card Layout */
+/* Gallery Section */
+.gallery-section {
+    padding: 20px;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.gallery-item {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .card-container {
     display: flex;
     justify-content: center;
@@ -185,8 +362,6 @@ main {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     margin: 10px;
     text-align: left;
-    flex: 1 1 300px;
-    max-width: 350px;
     box-sizing: border-box;
 }
 
@@ -196,53 +371,6 @@ main {
     border-radius: 8px;
 }
 
-.team-section .card {
-    text-align: center;
-}
-
-.team-section img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
-}
-
-/* Form Styles */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box; /* Added for better padding control */
-}
-
-/* Gallery */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.gallery-grid img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-/* Footer */
 footer {
     text-align: center;
     padding: 20px;
@@ -251,107 +379,232 @@ footer {
     margin-top: 30px;
 }
 
+/* Form Specific Styles (for joinus.html and contact.html) */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-group input, 
+.form-group textarea, 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* --- Team Display Styles (Reverted and Simplified) --- */
+.team-results-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.team-results-table th, .team-results-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.team-results-table th {
+    background-color: #000080;
+    color: white;
+    font-weight: 600;
+}
+
+.team-results-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.team-results-table tbody tr:hover {
+    background-color: #e9e9e9;
+}
+
+
+/* --- National Core Team Card Styles --- */
+.team-display-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.team-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.member-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 20px;
+    width: 280px; /* Fixed width for cards */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.member-image-container {
+    width: 100%;
+    height: 250px; /* Fixed height for image container */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.member-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This makes the image cover the area without distortion */
+}
+
+.member-details {
+    text-align: left;
+}
+
+.member-details h3 {
+    margin: 0 0 5px 0;
+    color: #000080;
+    font-size: 1.2em;
+}
+
+.member-details p {
+    margin: 3px 0;
+    color: #333;
+    font-size: 0.95em;
+}
+
+.member-details .position {
+    font-weight: bold;
+    color: #000;
+}
+
+
 /* --- Responsive Styles --- */
+@media (max-width: 1200px) {
+    .main-title { font-size: 2.4em; }
+    .header-logo { width: 130px; }
+}
 
 @media (max-width: 992px) {
-    h1 {
-        font-size: 1.5em;
+    .header-main {
+        flex-direction: column-reverse; /* Stack logo, then text, then members */
+        gap: 15px;
     }
-
-    .header-content {
-        /* Make space for the absolutely positioned nav-toggle */
-        padding-left: 60px;
-        position: relative;
+    .header-logo-container {
+        padding: 10px 0 0 0;
     }
-
+    .header-side-members {
+        flex-direction: row; /* Side by side on smaller screens */
+        justify-content: center;
+        margin-top: 10px;
+        gap: 20px;
+    }
+    .main-title {
+        font-size: 2em;
+    }
     .nav-toggle {
-        display: block; /* Show hamburger icon */
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 2em; /* Made it a bit bigger */
-        cursor: pointer;
-        z-index: 1001; /* Ensure it's above other header content */
+        display: block; /* Show hamburger menu icon */
     }
-
-    .main-nav {
-        display: none; /* Hide nav by default */
-        width: 100%;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        background: white;
-        border-top: 1px solid #ddd;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        z-index: 1000;
+    .main-navbar {
+        padding-top: 0;
     }
-
-    .main-nav.nav-active {
-        display: block; /* Show nav when active */
-    }
-
-    .main-nav ul {
+    .nav-links {
+        display: none; /* Hide nav links by default */
         flex-direction: column;
-        align-items: center;
+        width: 100%;
     }
-
-    .main-nav li {
-        margin: 15px 0;
+    .nav-links.nav-active {
+        display: flex; /* Show nav links when toggled */
+    }
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
-    /* The header content will no longer stack, it will stay as a row */
-    /* The nav-toggle is already positioned absolutely from the 992px media query */
-
-    .logo {
-        /* Make logo slightly smaller on the smallest screens */
-        width: 60px;
-        margin-right: 15px; /* Add some space between logo and title */
+    .leader-images {
+        display: none; /* Hide leader images on mobile */
     }
-
-    h1 {
-        font-size: 1.2em; /* Adjust font size */
-        text-align: left; /* Align to left to follow the logo */
+    .main-title {
+        font-size: 1.8em;
     }
-
-    .header-content {
-        /* Adjust padding for smaller screens */
-        padding-left: 70px; /* Increased padding for the icon */
-        justify-content: flex-start; /* Align items to the start */
-    }
-    
-    .container {
-        padding: 10px;
-    }
-
-    .card {
-        margin-left: 0;
-        margin-right: 0;
-        flex-basis: 90%;
-        padding: 15px;
-    }
-
-    .card-container {
-       flex-direction: column; 
-       align-items: center;
-    }
-
-    .slider-btn {
-        padding: 5px;
+    .sub-title {
         font-size: 1em;
     }
+    .contact-info, .address {
+        font-size: 0.9em;
+    }
+    .header-logo {
+        width: 110px;
+    }
+    .language-switcher {
+        top: 10px;
+        right: 10px;
+    }
+    .language-switcher a {
+        padding: 4px 8px;
+        font-size: 0.9em;
+    }
+    .header-side-members {
+        gap: 10px;
+    }
+    .side-member-card img {
+        width: 70px;
+    }
+     .slide {
+        max-height: 60vh; /* **ADJUSTED** for smaller screens */
+    }
+}
 
-    .welcome-section h2 {
+@media (max-width: 480px) {
+    .main-title {
         font-size: 1.5em;
     }
-
-    .form-group {
-        padding: 0 10px;
-    }
-
-    footer {
+    .sub-title {
         font-size: 0.9em;
+    }
+    .header-side-members {
+        flex-direction: column;
+    }
+    .side-member-card img {
+        width: 60px;
+    }
+    .contact-info, .address {
+        font-size: 0.8em;
+    }
+    .gallery-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+    }
+    .slide {
+        max-height: 50vh; /* **ADJUSTED** for very small screens */
     }
 }

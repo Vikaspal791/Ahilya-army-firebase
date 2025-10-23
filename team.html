@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donate - Ahilya Army Bharat Ekta Mission</title>
+    <title>Our Team - Ahilya Army Bharat Ekta Mission</title>
     <link rel="icon" href="images/Ahilya army logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
@@ -67,30 +67,114 @@
         </ul>
     </nav>
     <main class="container">
-        <section class="donate-section">
-            <h2>Support Our Mission</h2>
-            <div class="card">
-                <p>Your contribution will help us continue our work of promoting peace, unity, and development across India. Every donation, no matter how small, makes a difference.</p>
-                <p>To donate, please use the following details:</p>
-                <p><strong>Bank Name:</strong> [Your Bank Name]</p>
-                <p><strong>Account Number:</strong> [Your Account Number]</p>
-                <p><strong>IFSC Code:</strong> [Your IFSC Code]</p>
-                <br>
-                <p>Alternatively, you can scan the QR code below to donate using UPI.</p>
-                <img src="images/upi-qr-code.png" alt="UPI QR Code" style="max-width: 200px; margin-top: 20px;">
-                <br><br>
-                <a href="#" class="btn">Donate with Razorpay</a>
+        <section class="team-section">
+            <h2>National Core Team</h2>
+            <p>Meet the dedicated national leaders of Ahilya Army Bharat Ekta Mission.</p>
+             <div class="team-display-container">
+                <!-- Row 1: President -->
+                <div class="team-row">
+                    <div class="member-card">
+                        <div class="member-image-container">
+                            <img src="images/dharmendra-pal.png" alt="मा. धर्मेन्द्र पाल">
+                        </div>
+                        <div class="member-details">
+                            <h3>मा. धर्मेन्द्र पाल</h3>
+                            <p class="position">National President</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row 2: Two Members -->
+                <div class="team-row">
+                    <div class="member-card">
+                        <div class="member-image-container">
+                            <img src="images/shivakant-pal.png" alt="मा. डॉ. शिवाकान्त पाल">
+                        </div>
+                        <div class="member-details">
+                            <h3>मा. डॉ. शिवाकान्त पाल</h3>
+                            <p class="position">National General Secretary</p>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-image-container">
+                             <img src="images/Ahilya army logo.png" alt="Placeholder">
+                        </div>
+                        <div class="member-details">
+                            <h3>Member Name</h3>
+                            <p class="position">National Vice President</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Row 3: Three Members -->
+                <div class="team-row">
+                     <div class="member-card">
+                        <div class="member-image-container">
+                             <img src="images/Ahilya army logo.png" alt="Placeholder">
+                        </div>
+                        <div class="member-details">
+                            <h3>Member Name</h3>
+                            <p class="position">National Secretary</p>
+                        </div>
+                    </div>
+                     <div class="member-card">
+                        <div class="member-image-container">
+                             <img src="images/Ahilya army logo.png" alt="Placeholder">
+                        </div>
+                        <div class="member-details">
+                            <h3>Member Name</h3>
+                            <p class="position">National Treasurer</p>
+                        </div>
+                    </div>
+                     <div class="member-card">
+                        <div class="member-image-container">
+                             <img src="images/Ahilya army logo.png" alt="Placeholder">
+                        </div>
+                        <div class="member-details">
+                            <h3>Member Name</h3>
+                            <p class="position">National Media Incharge</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <section class="team-finder-section">
+            <h2>Find Our Team in Your Area</h2>
+            <div class="finder-controls card">
+                <div class="finder-dropdowns">
+                    <div class="form-group">
+                        <label for="stateSelect">Select State</label>
+                        <select id="stateSelect" name="state">
+                            <option value="">-- Select a State --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="districtSelect">Select District</label>
+                        <select id="districtSelect" name="district">
+                            <option value="">-- Select a District --</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="searchBtn" class="btn">Search Team</button>
+            </div>
+            <div id="team-display">
+                <p>Please select a state and district to find the team in your area.</p>
+            </div>
+        </section>
+
     </main>
     <footer>
         <p>&copy; 2024 Ahilya Army Bharat Ekta Mission. All Rights Reserved.</p>
     </footer>
-    
+
     <!-- Google Translate Element -->
     <div id="google_translate_element" style="display:none;"></div>
 
     <script src="js/main.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js"></script>
+    <script type="module" src="js/team.js"></script>
 
     <!-- Google Translate Scripts for Custom Button -->
     <script type="text/javascript">

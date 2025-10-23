@@ -37,13 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000); // Change slide every 5 seconds
     }
 
-    // Hamburger Menu
+    // Hamburger Menu for the new navigation bar
     const navToggle = document.querySelector('.nav-toggle');
-    const mainNav = document.querySelector('.main-nav');
+    const navLinks = document.querySelector('.nav-links');
 
-    if (navToggle && mainNav) {
+    if (navToggle && navLinks) {
         navToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('nav-active');
+            navLinks.classList.toggle('nav-active');
         });
     }
 });

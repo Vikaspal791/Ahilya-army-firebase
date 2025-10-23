@@ -4,87 +4,211 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Us - Ahilya Army Bharat Ekta Mission</title>
+    <link rel="icon" href="images/Ahilya army logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <img src="images/ahilya_army_header.png" alt="Ahilya Army Logo" class="logo">
-            <h1>Ahilya Army Bharat Ekta Mission</h1>
-            <div class="nav-toggle">☰</div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="joinus.html">Join Us</a></li>
-                    <li><a href="donate.html">Donate</a></li>
-                    <li><a href="admin.html">Admin Panel</a></li>
-                </ul>
-            </nav>
+    <header class="site-header">
+        <div class="language-switcher">
+            <a href="javascript:void(0)" onclick="toggleLanguage()" title="Switch Language">EN/HI</a>
+        </div>
+        <div class="leader-images">
+            <img src="images/leader/ahilya bai holkar.jpeg" alt="Ahilya Bai Holkar" class="ahilya-bai-img">
+            <img src="images/leader/leader (1).jpeg" alt="Leader 1">
+            <img src="images/leader/leader (2).jpeg" alt="Leader 2">
+            <img src="images/leader/leader (3).jpeg" alt="Leader 3">
+            <img src="images/leader/leader (4).jpeg" alt="Leader 4">
+            <img src="images/leader/leader (5).jpeg" alt="Leader 5">
+            <img src="images/leader/leader (6).jpeg" alt="Leader 6">
+            <img src="images/leader/leader (7).jpeg" alt="Leader 7">
+            <img src="images/leader/leader (8).jpeg" alt="Leader 8">
+            <img src="images/leader/leader (9).jpeg" alt="Leader 9">
+            <img src="images/leader/leader (10).jpeg" alt="Leader 10">
+        </div>
+        <div class="header-main">
+            <div class="header-side-members">
+                <div class="side-member-card">
+                    <img src="images/dharmendra-pal.png" alt="मा. धर्मेन्द्र पाल">
+                    <p><strong>मा. धर्मेन्द्र पाल</strong><br>(राष्ट्रीय अध्यक्ष)</p>
+                </div>
+                <div class="side-member-card">
+                    <img src="images/shivakant-pal.png" alt="मा. डॉ. शिवाकान्त पाल">
+                    <p><strong>मा. डॉ. शिवाकान्त पाल</strong><br>(राष्ट्रीय महासचिव)</p>
+                </div>
+            </div>
+            <div class="header-text">
+                <h1 class="main-title">अहिल्या आर्मी भारत एकता मिशन</h1>
+                <p class="sub-title">(A.A.B.E.M ASSOCIATION)</p>
+                <hr class="title-hr">
+                <p class="contact-info">दूरभाष - 9454676902, 9410649809, 8948695309, 9411171900</p>
+                <p class="address">केन्द्रीय कार्यालय- नियर इण्डियन ऑयल पेट्रोल पम्प, पारुल ऑटोमोबाइल्स, सीतापुर, रामपुर थरियाँव पोस्ट बहरामपुर, फतेहपुर (उ.प्र.) 212622</p>
+            </div>
+            <div class="header-logo-container">
+                <img src="images/Ahilya army logo.png" alt="Ahilya Army Logo" class="header-logo">
+                 <p class="reg-text">Reg.:</p>
+            </div>
         </div>
     </header>
+
+    <nav class="main-navbar">
+        <div class="nav-toggle">☰</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="team.html">Our Team</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="joinus.html">Join Us</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="admin.html">Admin Panel</a></li>
+        </ul>
+    </nav>
     <main class="container">
         <section class="join-form-section">
-            <h2>Join Us</h2>
+            <h2>Join Our Mission</h2>
+            <p>Become a part of a movement dedicated to unity and social progress.</p>
             <form id="joinForm" class="card">
+
+                <h4>1. Select Your Membership Type</h4>
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="joinType">How would you like to join?</label>
+                    <select id="joinType" name="joinType" required>
+                        <option value="">-- Choose an Option --</option>
+                        <option value="member">Become a Member</option>
+                        <option value="worker">Apply for a Position</option>
+                    </select>
                 </div>
-                <div class="form-group">
-                    <label for="fatherName">Father's Name</label>
-                    <input type="text" id="fatherName" name="fatherName" required>
+
+                <hr>
+
+                <!-- Fields for EVERYONE -->
+                <div id="basic-details">
+                    <h4>2. Basic Information</h4>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fatherName">Father's Name</label>
+                        <input type="text" id="fatherName" name="fatherName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="state">State</label>
+                        <select id="state" name="state" required>
+                            <option value="">-- Select State --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">District</label>
+                        <select id="district" name="district" required>
+                            <option value="">-- Select District --</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="mobile">Mobile Number</label>
-                    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+
+                <!-- Fields ONLY for WORKERS -->
+                <div id="worker-details" style="display:none;">
+                    <h4>3. Additional Information for Position Application</h4>
+                     <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Your Photo</label>
+                        <input type="file" id="photo" name="photo" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="block">Block</label>
+                        <input type="text" id="block" name="block">
+                    </div>
+                    <div class="form-group">
+                        <label for="address1">Full Address (Street, Village, etc.)</label>
+                        <input type="text" id="address1" name="address1">
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code</label>
+                        <input type="text" id="postalCode" name="postalCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="teamLevel">Select Team Level</label>
+                        <select id="teamLevel" name="teamLevel">
+                            <option value="">-- Select Level --</option>
+                            <option value="District">District Team</option>
+                            <option value="Block">Block Team</option>
+                            <option value="Tehsil">Tehsil Team</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Select Position</label>
+                        <select id="position" name="position">
+                            <option value="">-- First select State, District, and Level --</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="address1">Address Line 1</label>
-                    <input type="text" id="address1" name="address1" required>
-                </div>
-                <div class="form-group">
-                    <label for="address2">Address Line 2</label>
-                    <input type="text" id="address2" name="address2">
-                </div>
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" required>
-                </div>
-                <div class="form-group">
-                    <label for="state">State</label>
-                    <input type="text" id="state" name="state" required>
-                </div>
-                <div class="form-group">
-                    <label for="district">District</label>
-                    <input type="text" id="district" name="district" required>
-                </div>
-                <div class="form-group">
-                    <label for="postalCode">Postal Code</label>
-                    <input type="text" id="postalCode" name="postalCode" required>
-                </div>
-                <div class="form-group">
-                    <label for="country">Country</label>
-                    <input type="text" id="country" name="country" value="India" required>
-                </div>
-                <button type="submit" class="btn">Register</button>
+
+                <button type="submit" class="btn" id="submitBtn">Submit Application</button>
+                <p id="formMessage" style="display:none; margin-top: 15px;"></p>
+
             </form>
-            <p id="registrationSuccessMessage" style="display:none; color: green;"></p>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 Ahilya Army Bharat Ekta Mission. All Rights Reserved.</p>
     </footer>
+    
+    <!-- Google Translate Element -->
+    <div id="google_translate_element" style="display:none;"></div>
+
     <script src="js/main.js"></script>
     <script type="module" src="js/joinus.js"></script>
+
+    <!-- Google Translate Scripts for Custom Button -->
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+    }
+
+    function getCookie(name) {
+        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return v ? v[2] : null;
+    }
+
+    function setCookie(name, value, days) {
+        var d = new Date;
+        d.setTime(d.getTime() + 24*60*60*1000*days);
+        document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+    }
+
+    function toggleLanguage() {
+        var langCookie = getCookie('googtrans');
+        // If cookie is /en/hi, switch to english, else switch to hindi
+        if (langCookie === '/en/hi') {
+            changeLanguage('en');
+        } else {
+            changeLanguage('hi');
+        }
+    }
+
+    function changeLanguage(lang) {
+        var currentLang = getCookie('googtrans');
+        if (!currentLang) {
+            currentLang = '/en/en'; // Default
+        }
+        
+        // This sets the cookie that Google Translate reads on the next page load
+        setCookie('googtrans', '/en/' + lang, 1);
+        
+        // Reload the page to apply the new language
+        window.location.reload();
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

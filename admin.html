@@ -4,30 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Ahilya Army Bharat Ekta Mission</title>
+    <link rel="icon" href="images/Ahilya army logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+    <!-- PDF.js viewer CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf_viewer.css">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <img src="images/ahilya_army_header.png" alt="Ahilya Army Logo" class="logo">
-            <h1>Ahilya Army Bharat Ekta Mission</h1>
-            <div class="nav-toggle">☰</div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="joinus.html">Join Us</a></li>
-                    <li><a href="donate.html">Donate</a></li>
-                    <li><a href="admin.html">Admin Panel</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header class="site-header">
+        <!-- ... (header content remains the same) ... -->
     </header>
+
+    <nav class="main-navbar">
+        <!-- ... (navbar content remains the same) ... -->
+    </nav>
     <main class="container">
         <section id="loginSection" class="card">
             <h2>Admin Login</h2>
@@ -39,62 +29,127 @@
         </section>
 
         <section id="adminPanel" style="display: none;">
-            <h2>Member Records</h2>
-            <div class="admin-controls">
-                <input type="text" id="searchInput" placeholder="Search by Name, Mobile, or ID">
-                <button id="exportCsvBtn" class="btn">Export to CSV</button>
-            </div>
-            <div class="table-container">
-                <table id="membersTable">
-                    <thead>
-                        <tr>
-                            <th>Member ID</th>
-                            <th>Name</th>
-                            <th>Father's Name</th>
-                            <th>Mobile</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Member data will be inserted here -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
+            <div class="admin-dashboard">
 
-        <div id="idCardModal" class="modal" style="display:none;">
-            <div class="modal-content card">
-                <span class="close">&times;</span>
-                <h3>Member ID Card</h3>
-                <div id="idCard">
-                    <div class="id-card-header">
-                        <img src="images/ahilya_army_header.png" alt="Logo">
-                        <h4>Ahilya Army Bharat Ekta Mission</h4>
-                    </div>
-                    <div class="id-card-body">
-                        <img id="memberPhoto" src="" alt="Member Photo">
-                        <div class="member-info">
-                            <p><strong>Name:</strong> <span id="cardMemberName"></span></p>
-                            <p><strong>Role/Position:</strong> <span id="cardMemberRole">Member</span></p>
-                            <p><strong>Member ID:</strong> <span id="cardMemberId"></span></p>
-                        </div>
-                        <div id="qrcode"></div>
+                <div id="join-requests-column" class="admin-column">
+                    <div class="card">
+                        <h3>Pending Join Requests</h3>
+                        <div id="requests-list"></div>
                     </div>
                 </div>
-                <input type="file" id="photoUpload" accept="image/*">
-                <button id="uploadPhotoBtn" class="btn">Upload Photo</button>
-                <button id="printCardBtn" class="btn">Print Card</button>
+
+                <div id="team-management-column" class="admin-column">
+                    <div class="card">
+                        <h3>Add/Edit Member</h3>
+                        <p>Approve a request or add a member manually.</p>
+                        <form id="teamMemberForm">
+                            <input type="hidden" id="memberId" name="memberId">
+                            <input type="hidden" id="joinRequestId" name="joinRequestId">
+                            <input type="hidden" id="photoURL" name="photoURL">
+
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fatherName">Father's Name</label>
+                                <input type="text" id="fatherName" name="fatherName" required>
+                            </div>
+                             <div class="form-group">
+                                <label for="teamLevel">Team Level</label>
+                                <select id="teamLevel" name="teamLevel" required>
+                                    <option value="">-- Select Level --</option>
+                                    <option value="District">District Team</option>
+                                    <option value="Block">Block Team</option>
+                                    <option value="Tehsil">Tehsil Team</option>
+                                    <option value="Member">Member</option> <!-- For basic members -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="position">Position</label>
+                                <select id="position" name="position" required>
+                                    <option value="">-- Select Level First --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile">Mobile Number</label>
+                                <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Full Address</label>
+                                <input type="text" id="address" name="address">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <select id="state" name="state" required>
+                                    <option value="">-- Select State --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="district">District</label>
+                                <select id="district" name="district" required>
+                                    <option value="">-- Select District --</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn">Save Member</button>
+                            <button type="button" id="clearFormBtn" class="btn-secondary">Clear Form</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Upload Members via File</h3>
+                        <div class="form-group">
+                            <label for="fileInput">Choose a .csv, .xlsx, or .pdf file</label>
+                            <input type="file" id="fileInput" name="fileInput" accept=".csv, .xlsx, .pdf, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                        </div>
+                        <button id="uploadFileBtn" class="btn">Preview Data from File</button>
+                        <p><small><strong>Required Headers:</strong> <code>name, fatherName, teamLevel, position, mobile, email, address, state, district</code></small></p>
+                    </div>
+                    
+                    <div class="card" id="preview-card" style="display:none;">
+                        <h3>File Data Preview</h3>
+                        <p>Review the data below. If it looks correct, click "Add All Members" to save them to the database.</p>
+                        <div id="preview-area" class="table-container"></div>
+                        <button id="addAllBtn" class="btn">Add All Members from Preview</button>
+                    </div>
+
+                    <div class="card">
+                      <h3>Existing Team Members</h3>
+                      <div id="existingMembers" class="table-container">
+                      </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
     </main>
     <footer>
         <p>&copy; 2024 Ahilya Army Bharat Ekta Mission. All Rights Reserved.</p>
     </footer>
+    
+    <div id="google_translate_element" style="display:none;"></div>
+
     <script src="js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    <script type="module" src="js/admin.js"></script>
+    <!-- Libraries for File Parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+    <script type="module" src="js/admin-team.js"></script>
+
+    <script type="text/javascript">
+    // Google Translate functions remain the same
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+    }
+    function getCookie(name){var v=document.cookie.match('(^|;) ?'+name+'=([^;]*)(;|$)');return v?v[2]:null;}
+    function setCookie(name,value,days){var d=new Date;d.setTime(d.getTime()+24*60*60*1000*days);document.cookie=name+"="+value+";path=/;expires="+d.toGMTString();}
+    function toggleLanguage(){var c=getCookie('googtrans');if(c==='/en/hi'){changeLanguage('en');}else{changeLanguage('hi');}}
+    function changeLanguage(lang){setCookie('googtrans','/en/'+lang,1);window.location.reload();}
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

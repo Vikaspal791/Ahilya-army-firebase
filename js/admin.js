@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Login
     loginBtn.addEventListener('click', () => {
-        if (passwordInput.value === 'admin1234') {
+        if (passwordInput.value === 'admin12345') {
             loginSection.style.display = 'none';
             adminPanel.style.display = 'block';
             loadMembers();

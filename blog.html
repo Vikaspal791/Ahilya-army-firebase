@@ -4,50 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Ahilya Army Bharat Ekta Mission</title>
+    <link rel="icon" href="images/Ahilya army logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <img src="images/ahilya_army_header.png" alt="Ahilya Army Logo" class="logo">
-            <h1>Ahilya Army Bharat Ekta Mission</h1>
-            <div class="nav-toggle">☰</div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="joinus.html">Join Us</a></li>
-                    <li><a href="donate.html">Donate</a></li>
-                    <li><a href="admin.html">Admin Panel</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
     <main class="container">
         <section class="blog-section">
             <h2>Our Blog</h2>
-            <div class="card">
-                <h3>The Legacy of Lokmata Ahilya Bai Holkar</h3>
-                <p class="blog-meta">Published on: May 25, 2024</p>
-                <p>An inspiring article about the life and principles of Ahilya Bai Holkar and how they guide our mission. Her focus on justice, good governance, and public welfare continues to be the cornerstone of our organization.</p>
-                <a href="#" class="btn">Read More</a>
+            <div class="card" id="blog-post-1">
+                <h3>The Enduring Legacy of Lokmata Ahilya Bai Holkar</h3>
+                <p class="blog-meta">Published on: June 10, 2024</p>
+                <p>Lokmata Ahilya Bai Holkar, a beacon of strength and wisdom, ruled Malwa with unparalleled compassion and foresight. Her reign is remembered for its focus on justice, good governance, and public welfare...</p>
+                <a href="post1.html" class="btn">Read More</a>
             </div>
-            <div class="card">
-                <h3>Uniting India, One Step at a Time</h3>
-                <p class="blog-meta">Published on: June 1, 2024</p>
-                <p>A look into our recent community outreach programs and their impact on fostering unity and harmony. We discuss the challenges and successes of our mission to bring people together from all walks of life.</p>
-                <a href="#" class="btn">Read More</a>
+            <div class="card" id="blog-post-2">
+                <h3>Ahilya Bai's Vision for a United India</h3>
+                <p class="blog-meta">Published on: June 12, 2024</p>
+                <p>Ahilya Bai Holkar was not just a ruler but a visionary who believed in the strength of a united India. She transcended regional and caste-based divisions, viewing all her subjects as one family...</p>
+                <a href="post2.html" class="btn">Read More</a>
+            </div>
+            <div class="card" id="blog-post-3">
+                <h3>The Architectural Marvels of Ahilya Bai Holkar</h3>
+                <p class="blog-meta">Published on: June 14, 2024</p>
+                <p>The reign of Ahilya Bai Holkar is often called a golden age of architecture. She rebuilt and restored some of India's most sacred sites, including the Kashi Vishwanath Temple in Varanasi and the Somnath Temple in Gujarat...</p>
+                <a href="post3.html" class="btn">Read More</a>
+            </div>
+            <div class="card" id="blog-post-4">
+                <h3>Ahilya Bai: A Symbol of Women's Empowerment</h3>
+                <p class="blog-meta">Published on: June 16, 2024</p>
+                <p>In an era when women were largely confined to the domestic sphere, Ahilya Bai Holkar shattered all stereotypes. She was an astute administrator, a skilled military strategist, and a compassionate leader...</p>
+                <a href="post4.html" class="btn">Read More</a>
+            </div>
+             <div class="card" id="blog-post-5">
+                <h3>The Spirit of Service: Lessons from Ahilya Bai's Life</h3>
+                <p class="blog-meta">Published on: June 18, 2024</p>
+                <p>Ahilya Bai Holkar’s life was a testament to the power of selfless service. She considered her kingdom's wealth to be a sacred trust, to be used for the welfare of her people. From building public works to ensuring swift justice...</p>
+                <a href="post5.html" class="btn">Read More</a>
             </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 Ahilya Army Bharat Ekta Mission. All Rights Reserved.</p>
-    </footer>
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Function to fetch and insert HTML content
+        const includeHTML = (filePath, elementId) => {
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // If we just loaded the header, run the script to activate the nav link
+                    if (elementId === 'header-placeholder') {
+                        activateCurrentNavLink();
+                        // Also, re-initialize any scripts that were in the original header, like main.js for the navbar toggle
+                        const navToggle = document.querySelector('.nav-toggle');
+                        const navLinks = document.querySelector('.nav-links');
+                        if (navToggle) {
+                            navToggle.addEventListener('click', () => {
+                                navLinks.classList.toggle('active');
+                            });
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        };
+
+        // Load Header and Footer
+        document.addEventListener('DOMContentLoaded', () => {
+            includeHTML('header.html', 'header-placeholder');
+            includeHTML('footer.html', 'footer-placeholder');
+        });
+
+        // Function to highlight the active navigation link
+        const activateCurrentNavLink = () => {
+            const currentPage = window.location.pathname.split("/").pop() || "index.html";
+            const navLinks = document.querySelectorAll(".nav-links a");
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add("active");
+                }
+            });
+        };
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>

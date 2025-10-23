@@ -4,44 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - Ahilya Army Bharat Ekta Mission</title>
+    <link rel="icon" href="images/Ahilya army logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <img src="images/ahilya_army_header.png" alt="Ahilya Army Logo" class="logo">
-            <h1>Ahilya Army Bharat Ekta Mission</h1>
-            <div class="nav-toggle">☰</div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="joinus.html">Join Us</a></li>
-                    <li><a href="donate.html">Donate</a></li>
-                    <li><a href="admin.html">Admin Panel</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
     <main class="container">
         <section class="gallery-section">
             <h2>Our Gallery</h2>
             <div class="gallery-grid">
-                <div class="card"><img src="images/gallery1.jpg" alt="Gallery Image 1"></div>
-                <div class="card"><img src="images/gallery2.jpg" alt="Gallery Image 2"></div>
-                <div class="card"><img src="images/gallery3.jpg" alt="Gallery Image 3"></div>
-                <div class="card"><img src="images/gallery4.jpg" alt="Gallery Image 4"></div>
+                <div class="gallery-item"><img src="images/gallery/gallery (1).jpg" alt="Gallery Image 1"></div>
+                <div class="gallery-item"><img src="images/gallery/gallery (2).jpg" alt="Gallery Image 2"></div>
+                <div class="gallery-item"><img src="images/gallery/gallery (3).jpg" alt="Gallery Image 3"></div>
+                <div class="gallery-item"><img src="images/gallery/gallery (4).jpg" alt="Gallery Image 4"></div>
+                <div class="gallery-item"><img src="images/gallery/gallery (5).jpg" alt="Gallery Image 5"></div>
+                <div class="gallery-item"><img src="images/gallery/gallery (6).jpg" alt="Gallery Image 6"></div>
+                <div class="gallery-item"><img src="images/gallery/gallery (7).jpg" alt="Gallery Image 7"></div>
+                <div class="gallery-item"><img src="images/gallery/gallery (8).jpg" alt="Gallery Image 8"></div>
+                <div class="gallery-item"><img src="images/gallery/gallery (9).jpg" alt="Gallery Image 9"></div>
             </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 Ahilya Army Bharat Ekta Mission. All Rights Reserved.</p>
-    </footer>
+    <div id="footer-placeholder"></div>
+    <script>
+        // Function to fetch and insert HTML content
+        const includeHTML = (filePath, elementId) => {
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                    // If we just loaded the header, run the script to activate the nav link
+                    if (elementId === 'header-placeholder') {
+                        activateCurrentNavLink();
+                        // Also, re-initialize any scripts that were in the original header, like main.js for the navbar toggle
+                        const navToggle = document.querySelector('.nav-toggle');
+                        const navLinks = document.querySelector('.nav-links');
+                        if (navToggle) {
+                            navToggle.addEventListener('click', () => {
+                                navLinks.classList.toggle('active');
+                            });
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        };
+
+        // Load Header and Footer
+        document.addEventListener('DOMContentLoaded', () => {
+            includeHTML('header.html', 'header-placeholder');
+            includeHTML('footer.html', 'footer-placeholder');
+        });
+
+        // Function to highlight the active navigation link
+        const activateCurrentNavLink = () => {
+            const currentPage = window.location.pathname.split("/").pop() || "index.html";
+            const navLinks = document.querySelectorAll(".nav-links a");
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add("active");
+                }
+            });
+        };
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>
