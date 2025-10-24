@@ -1,5 +1,8 @@
 # Dependencies
 node_modules/
 
-# IDE files
+# IDE specific files
 .idx/
+
+# Lockfiles
+package-lock.json
