@@ -9,7 +9,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="header-placeholder"></div>
+    <header class="site-header">
+        <div class="language-switcher">
+            <a href="javascript:void(0)" onclick="toggleLanguage()" title="Switch Language">EN/HI</a>
+        </div>
+        <div class="leader-images">
+            <img src="images/leader/ahilya bai holkar.jpeg" alt="Ahilya Bai Holkar" class="ahilya-bai-img">
+            <img src="images/leader/leader (1).jpeg" alt="Leader 1">
+            <img src="images/leader/leader (2).jpeg" alt="Leader 2">
+            <img src="images/leader/leader (3).jpeg" alt="Leader 3">
+            <img src="images/leader/leader (4).jpeg" alt="Leader 4">
+            <img src="images/leader/leader (5).jpeg" alt="Leader 5">
+            <img src="images/leader/leader (6).jpeg" alt="Leader 6">
+            <img src="images/leader/leader (7).jpeg" alt="Leader 7">
+            <img src="images/leader/leader (8).jpeg" alt="Leader 8">
+            <img src="images/leader/leader (9).jpeg" alt="Leader 9">
+            <img src="images/leader/leader (10).jpeg" alt="Leader 10">
+        </div>
+        <div class="header-main">
+            <div class="header-side-members">
+                <div class="side-member-card">
+                    <img src="images/dharmendra-pal.png" alt="मा. धर्मेन्द्र पाल">
+                    <p><strong>मा. धर्मेन्द्र पाल</strong><br>(राष्ट्रीय अध्यक्ष)</p>
+                </div>
+                <div class="side-member-card">
+                    <img src="images/shivakant-pal.png" alt="मा. डॉ. शिवाकान्त पाल">
+                    <p><strong>मा. डॉ. शिवाकान्त पाल</strong><br>(राष्ट्रीय महासचिव)</p>
+                </div>
+            </div>
+            <div class="header-text">
+                <h1 class="main-title">अहिल्या आर्मी भारत एकता मिशन</h1>
+                <p class="sub-title">(A.A.B.E.M ASSOCIATION)</p>
+                <hr class="title-hr">
+                <p class="contact-info">दूरभाष - 9454676902, 9410649809, 8948695309, 9411171900</p>
+                <p class="address">केन्द्रीय कार्यालय- नियर इण्डियन ऑयल पेट्रोल पम्प, पारुल ऑटोमोबाइल्स, सीतापुर, रामपुर थरियाँव पोस्ट बहरामपुर, फतेहपुर (उ.प्र.) 212622</p>
+            </div>
+            <div class="header-logo-container">
+                <img src="images/Ahilya army logo.png" alt="Ahilya Army Logo" class="header-logo">
+                 <p class="reg-text">Reg.:</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-navbar">
+        <div class="nav-toggle">☰</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="team.html">Our Team</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="joinus.html">Join Us</a></li>
+            <li><a href="donate.html">Donate</a></li>
+            <li><a href="admin.html">Admin Panel</a></li>
+        </ul>
+    </nav>
+
     <main class="container">
         <section class="blog-section">
             <h2>Our Blog</h2>
@@ -45,55 +102,56 @@
             </div>
         </section>
     </main>
-    <div id="footer-placeholder"></div>
 
-    <script>
-        // Function to fetch and insert HTML content
-        const includeHTML = (filePath, elementId) => {
-            fetch(filePath)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById(elementId).innerHTML = data;
-                    // If we just loaded the header, run the script to activate the nav link
-                    if (elementId === 'header-placeholder') {
-                        activateCurrentNavLink();
-                        // Also, re-initialize any scripts that were in the original header, like main.js for the navbar toggle
-                        const navToggle = document.querySelector('.nav-toggle');
-                        const navLinks = document.querySelector('.nav-links');
-                        if (navToggle) {
-                            navToggle.addEventListener('click', () => {
-                                navLinks.classList.toggle('active');
-                            });
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
-                });
-        };
+    <footer>
+        <p>&copy; 2024 Ahilya Army Bharat Ekta Mission. All Rights Reserved.</p>
+    </footer>
 
-        // Load Header and Footer
-        document.addEventListener('DOMContentLoaded', () => {
-            includeHTML('header.html', 'header-placeholder');
-            includeHTML('footer.html', 'footer-placeholder');
-        });
+    <!-- Google Translate Element -->
+    <div id="google_translate_element" style="display:none;"></div>
 
-        // Function to highlight the active navigation link
-        const activateCurrentNavLink = () => {
-            const currentPage = window.location.pathname.split("/").pop() || "index.html";
-            const navLinks = document.querySelectorAll(".nav-links a");
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add("active");
-                }
-            });
-        };
-    </script>
     <script src="js/main.js"></script>
+
+    <!-- Google Translate Scripts for Custom Button -->
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+    }
+
+    function getCookie(name) {
+        var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+        return v ? v[2] : null;
+    }
+
+    function setCookie(name, value, days) {
+        var d = new Date;
+        d.setTime(d.getTime() + 24*60*60*1000*days);
+        document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+    }
+
+    function toggleLanguage() {
+        var langCookie = getCookie('googtrans');
+        // If cookie is /en/hi, switch to english, else switch to hindi
+        if (langCookie === '/en/hi') {
+            changeLanguage('en');
+        } else {
+            changeLanguage('hi');
+        }
+    }
+
+    function changeLanguage(lang) {
+        var currentLang = getCookie('googtrans');
+        if (!currentLang) {
+            currentLang = '/en/en'; // Default
+        }
+
+        // This sets the cookie that Google Translate reads on the next page load
+        setCookie('googtrans', '/en/' + lang, 1);
+
+        // Reload the page to apply the new language
+        window.location.reload();
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

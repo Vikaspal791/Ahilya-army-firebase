@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahilya Army - Identity Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            min-height: 100vh; background-color: #f0f0f0; padding: 20px; box-sizing: border-box;
+        }
+        .icard {
+            width: 3.6in; /* Increased width */
+            height: 3.0in; /* Increased height */
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+            display: flex; flex-direction: column; box-sizing: border-box;
+            background: linear-gradient(135deg, #ff9a00 0%, #ff5f6d 100%);
+            color: black;
+            position: relative;
+            overflow: hidden;
+        }
+        .icard-header {
+            display: flex; align-items: center; padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .icard-header img { height: 40px; margin-right: 12px; }
+        .icard-header-text { text-align: center; flex-grow: 1; }
+        .icard-header-text h3 { margin: 0; font-size: 18px; font-weight: 600; }
+        .icard-header-text p { margin: 0; font-size: 9px; }
+        
+        .icard-body {
+            display: flex; padding: 10px 12px; flex-grow: 1; overflow: hidden;
+        }
+        .icard-main-details {
+             flex-grow: 1; padding-right: 8px; display: flex;
+        }
+        .icard-photo {
+            width: 85px;   /* Increased photo size */
+            height: 90px;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+        .icard-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+        
+        .icard-details {
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .icard-details p {
+            margin: 0px 0; /* Added a little vertical space */
+            line-height: 1.35;
+            font-size: 9px; /* Slightly larger font */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .icard-details strong { font-weight: 600; color: rgba(6, 6, 6, 0.9); }
+        
+        .icard-qr-code {
+            display: flex; flex-direction: column; align-items: center; justify-content: center; padding-left: 5px;
+        }
+        #qrcode { width: 70px !important; height: 70px !important; padding: 4px; background: white; border-radius: 5px; }
+        #qrcode canvas, #qrcode img { width: 100% !important; height: 100% !important; }
+        
+        .icard-uid { font-size: 8.5px; font-weight: bold; margin-top: 5px; text-align: center; }
+        
+        .icard-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 12px 6px 12px; position: relative;
+        }
+        .signature-block { text-align: center; }
+        .signature-block img { height: 22px; margin-bottom: -5px; }
+        .signature-block p { margin: 0; font-size: 8px; border-top: 1px solid rgba(255, 255, 255, 0.7); padding-top: 2px; }
+        .seal-img { position: absolute; left: 50%; top: -25px; transform: translateX(-50%); height: 50px !important; opacity: 0.8; }
+        
+        #downloadBtn { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #800000; color: white; border: none; border-radius: 5px; }
+
+    </style>
+</head>
+<body>
+    <div class="icard" id="icard-container">
+        <!-- Content is the same -->
+        <div class="icard-header"><img src="images/Ahilya army logo.png" alt="Logo"><div class="icard-header-text"><h3>अहिल्या आर्मी भारत एकता मिशन</h3><p>(A.A.B.E.M ASSOCIATION)</p></div></div>
+        <div class="icard-body">
+            <div class="icard-main-details"><div class="icard-photo"><img src="images/placeholder.png" alt="Member Photo" id="member-photo"></div><div class="icard-details"><p><strong>Name:</strong> <span id="member-name"></span></p><p><strong>Father's Name:</strong> <span id="member-father-name"></span></p><p><strong>Position:</strong> <span id="member-position"></span></p><p><strong>District:</strong> <span id="member-district"></span></p><p id="block-container" style="display: none;"><strong>Block:</strong> <span id="member-block"></span></p><p><strong>Address:</strong> <span id="member-address"></span></p><p><strong>Mobile:</strong> <span id="member-mobile"></span></p></div></div>
+            <div class="icard-qr-code"><div id="qrcode"></div><div class="icard-uid"><strong>UID:</strong> <span id="member-uid"></span></div></div>
+        </div>
+        <div class="icard-footer"><div class="signature-block"><img src="images/signature-president.png" alt="President Signature"><p>President</p></div><img src="images/seal.png" alt="Seal" class="seal-img"><div class="signature-block"><img src="images/signature-secretary.png" alt="Secretary Signature"><p>Gen. Secretary</p></div></div>
+    </div>
+    <button id="downloadBtn">Download I-Card (.pdf)</button>
+    <script type="module">
+        // JS logic remains the same
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        const firebaseConfig = { apiKey: "AIzaSyD-I0xUOqdAfCksKPRauG1FyKG3ySqaS-E", authDomain: "ahilya-army-website.firebaseapp.com", projectId: "ahilya-army-website", storageBucket: "ahilya-army-website.appspot.com", messagingSenderId: "724971338661", appId: "1:724971338661:web:163c50a8c700bc89a3c64c", measurementId: "G-YH8YF0REQT" };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        async function loadMemberData(){const urlParams=new URLSearchParams(window.location.search);const memberId=urlParams.get('id');if(!memberId){document.body.innerHTML='<h1>Error: No member ID provided.</h1>';return}try{const docRef=doc(db,"teamMembers",memberId);const docSnap=await getDoc(docRef);if(docSnap.exists()){const member=docSnap.data();const uid=member.uid||`AABEM-${String(new Date(member.createdAt.seconds*1000).getFullYear()).slice(-2)}${memberId.substring(0,4).toUpperCase()}`;document.getElementById('member-name').textContent=member.name||'';document.getElementById('member-father-name').textContent=member.fatherName||'';document.getElementById('member-position').textContent=member.position||'';document.getElementById('member-mobile').textContent=member.mobile||'';document.getElementById('member-address').textContent=member.address||'';document.getElementById('member-district').textContent=member.district||'';document.getElementById('member-uid').textContent=uid;const blockContainer=document.getElementById('block-container');if(member.block){document.getElementById('member-block').textContent=member.block;blockContainer.style.display='block'}if(member.photoURL){document.getElementById('member-photo').src=member.photoURL}const qrCodeElement=document.getElementById('qrcode');qrCodeElement.innerHTML='';new QRCode(qrCodeElement,{text:`Name: ${member.name}\nUID: ${uid}\nPosition: ${member.position}`,width:70,height:70,correctLevel:QRCode.CorrectLevel.H})}else{document.body.innerHTML=`<h1>Error: Member with ID ${memberId} not found.</h1>`}}catch(error){console.error("Error fetching member:",error);document.body.innerHTML='<h1>Error fetching member data.</h1>'}}document.getElementById('downloadBtn').addEventListener('click',()=>{const{jsPDF}=window.jspdf;const icardElement=document.getElementById('icard-container');const memberName=document.getElementById('member-name').textContent||'icard';const uid=document.getElementById('member-uid').textContent||'0000';html2canvas(icardElement,{scale:3,useCORS:true,backgroundColor:null}).then(canvas=>{const imgData=canvas.toDataURL('image/png');const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:[91.44,57.15]});pdf.addImage(imgData,'PNG',0,0,91.44,57.15);pdf.save(`ICard_${memberName.replace(/\s+/g,'_')}_${uid}.pdf`)}).catch(err=>{console.error("Error generating PDF:",err);alert("Error generating PDF.")})});loadMemberData();
+    </script>
+</body>
+</html>
